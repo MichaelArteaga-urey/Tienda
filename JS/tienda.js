@@ -1,3 +1,4 @@
+
 const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
 const onePiece = document.getElementById("tiendaOnePiece");

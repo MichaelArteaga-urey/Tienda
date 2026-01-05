@@ -1,3 +1,11 @@
+function guardarCarrito() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function cargarCarrito() {
+  carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+}
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function renderCart(){
@@ -7,7 +15,7 @@ function renderCart(){
 
   cart.forEach((item, index)=>{
     total += item.price;
-    
+
     cartItems.innerHTML += `
 <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
 
@@ -46,3 +54,5 @@ function AGREGAR(name, price, image){
 }
 
 document.addEventListener("DOMContentLoaded", renderCart);
+cargarCarrito();
+guardarCarrito();

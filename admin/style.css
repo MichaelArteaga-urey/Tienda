@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: aliceblue;
+}
+
+.fondo {
+    background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/16712.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.fondo::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8); /* desvanecido */
+    z-index: -1;
+}
+h1{
+    text-align: center;
+    margin: 30px 0px;
+
+}
+img{
+    width: 320px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15%;
+    height: 70px;
+    width: 100%;
+}
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 50px auto 45px auto;
+    width: 90%;
+    flex-wrap: wrap;
+    gap: 40px;
+
+}
+option{
+    color: black;
+}
+.contenedor>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(2, 11, 37);
+    height: 600px;
+    width: 400px;
+    border-radius: 20px;
+    flex-direction: column;
+    padding-top: 30px;
+
+    gap: 25px;
+    flex: 1 1 300px;
+}
+.contenedor>div>form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.contenedor>div>form>input,
+select{
+border-radius: 5px;
+border: none;
+padding: 5px;
+color: rgb(0, 0, 0);
+}
+
+
+.contenedor .button {
+margin-top: 15px;
+background: #2563eb;
+color: white;
+border: none;
+padding: 12px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: bold;
+transition: 0.3s;
+}
+.contenedor .button:hover {
+background: #1e40af;
+}
+.contenedorProductos h2{
+    text-align: center;
+    padding-bottom: 20px;
+    font-weight: 300;
+    font-size: 40px;
+}
+.mostrarProductos {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 100px;
+    flex-wrap: wrap;
+}
+.mostrarProductos>div{
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+.contenedorMensaje{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: auto;
+    height: 70px;
+}
+
+.repetidoError,
+.realizado,
+.llenarCampos,
+.noExsiteError {
+    margin: 15px 0px;
+
+}
+
+.llenarCampos::after,
+.noExsiteError::after,
+.repetidoError::after,
+.realizado::after{
+    background-color: #750505;
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.realizado::after{
+    content: 'Realizado';
+    background-color: #00ff15;
+}
+.llenarCampos::after{
+    content: 'Por favor compruebe que los campos esten llenados';
+}
+.noExsiteError::after{
+    content: 'Este elemento no Existe';
+}
+.repetidoError::after{
+    content: 'Este elemento ya existe';
+}

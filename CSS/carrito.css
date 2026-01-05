@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+.grid_productos
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1rf);
+    width: 60%;
+
+}
+.carrito_flotante{
+    width: 40%;
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+.tarjeta{
+    background-color: azure;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid azure;
+}

@@ -48,4 +48,3 @@ buscador.addEventListener("input",()=>{
         }
     })
 })
-

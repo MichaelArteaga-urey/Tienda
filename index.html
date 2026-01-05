@@ -2,7 +2,8 @@
 <html lang="es">
     <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda online de figuras coleccionables de anime y videojuegos">
+
     <!--FLOWBITE-->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
@@ -43,12 +44,12 @@
 
 <!--BOTON DE CARRITO-->
 <form >
-          <li>
+          <div>
           <a href="PAG/carrito.html" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">🛒
             <span id="carritoContador"
             class="absolute -top-1 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full hidden">0</span>
           </a>
-        </li>
+        </div>
 </form>
 <!-- BOTON RESPONSIVO-->
     <button data-collapse-toggle="navbar-default" type="button"
@@ -81,17 +82,17 @@
 
 <main class="pt-20">
 
-  <section class="contenedorProductos">
+  <section class="contenedorProductos" id="productos">
     <h2>Figuras de One Piece</h2>
     <div id="tiendaOnePiece" class="grid-productos"></div>
   </section>
 
-  <section class="contenedorProductos">
+  <section class="contenedorProductos" id="productos">
     <h2>Figuras de Dragon Ball</h2>
     <div id="tiendaDragonBall" class="grid-productos"></div>
   </section>
 
-  <section class="contenedorProductos">
+  <section class="contenedorProductos" id="productos">
     <h2>Figuras de Bleach</h2>
     <div id="tiendaBleach" class="grid-productos"></div>
   </section>

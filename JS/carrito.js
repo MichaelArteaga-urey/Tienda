@@ -7,6 +7,7 @@ function renderCart(){
 
   cart.forEach((item, index)=>{
     total += item.price;
+    
     cartItems.innerHTML += `
 <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
 

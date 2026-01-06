@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/CSS/componentes.css">
     <title>SHOPFIGURE</title>
     </head>
+
 <body class="relative min-h-screen">
 <!--FONDO DE PANTALLA-->
 <div class="fondo"></div>
@@ -45,10 +46,16 @@
 <!--BOTON DE CARRITO-->
 <form >
           <div>
-          <a href="PAG/carrito.html" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">🛒
-            <span id="carritoContador"
-            class="absolute -top-1 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full hidden">0</span>
-          </a>
+          <a href="PAG/carrito.html"
+          class="relative block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">
+  🛒
+  <span
+    id="carritoContador"
+    class="absolute -top-2 -right-3 bg-red-600 text-white text-xs
+          w-5 h-5 flex items-center justify-center rounded-full hidden">
+    0
+  </span>
+</a>
         </div>
 </form>
 <!-- BOTON RESPONSIVO-->
@@ -84,23 +91,33 @@
 
         <div class="contenedorProductos">
             <h2 class="text-3xl font-bold text-center mb-8">Figuras de One Piece</h2>
-          <div class="mostrarProductos" id="tiendaOnepiece"></div>
+          <div class="mostrarProductos" data-categoria="onepiece"></div>
         </div>
 
         <div class="contenedorProductos">
           <h2 class="text-3xl font-bold text-center mb-8">Figuras de Dragon Ball</h2>
-        <div class="mostrarProductos" id="tiendaDragonball"></div>
+        <div class="mostrarProductos" data-categoria="dragonball"></div>
         </div>
 
         <div class="contenedorProductos">
           <h2 class="text-3xl font-bold text-center mb-8">Figuras de Bleach</h2>
-        <div class="mostrarProductos" id="tiendaBleach"></div>
+        <div class="mostrarProductos" data-categoria="bleach"></div>
+        </div>
+        <div class="contenedorProductos">
+          <h2 class="text-3xl font-bold text-center mb-8">Figuras de Marvel</h2>
+        <div class="mostrarProductos" data-categoria="marvel"></div>
         </div>
 
 </main>
-    <script type="module" src="/JS/cartas.js"></script>
-    <script type="module" src="/JS/tienda.js"></script>
-    <script src="/JS/carrito.js"></script>
+
+<script type="module" src="./JS/tienda.js"></script>
+<script type="module" src="./JS/cartas.js"></script>
+<script type="module" src="./JS/carrito.js"></script>
+<script type="module" src="./JS/contador.js"></script>
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     </body>
 </html>

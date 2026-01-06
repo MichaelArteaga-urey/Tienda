@@ -1,61 +1,86 @@
 import {
-    obtenerCarrito,
-    guardarCarrito,
-    obtenerProductos
+  obtenerCarrito,
+  guardarCarrito,
 } from "./storage.js";
+import { crearCardProducto } from "./cartas.js"
 
+/* ===============================
+   VARIABLES
+================================ */
 const contenedor = document.getElementById("contenedorCarrito");
-const totalSpan = document.getElementById("totalCarrito");
+const totalSpan = document.getElementById("total");
+const botonVaciar = document.getElementById("vaciar");
 
-let carrito = obtenerCarrito();
-let productos = obtenerProductos();
-
+/* ===============================
+   RENDER CARRITO
+================================ */
 function renderCarrito() {
-    contenedor.innerHTML = "";
-    let total = 0;
+  const carrito = obtenerCarrito();
 
-    if (carrito.length === 0) {
-        contenedor.innerHTML = "<p>El carrito está vacío</p>";
-        totalSpan.textContent = "$0";
-        return;
-    }
+  // Si no estamos en carrito.html, no hacemos nada
+  if (!contenedor || !totalSpan) return;
 
-    carrito.forEach(item => {
+  contenedor.innerHTML = "";
+  let total = 0;
 
-        const producto = productos.find(p => p.id === item.id);
-        if (!producto) return;
+  if (carrito.length === 0) {
+    contenedor.innerHTML = "<p class='text-center text-gray-500'>El carrito está vacío</p>";
+    totalSpan.textContent = "$0";
+    return;
+  }
 
-        const subtotal = producto.precio * item.cantidad;
-        total += subtotal;
+  carrito.forEach(item => {
+    const subtotal = item.precio * item.cantidad;
+    total += subtotal;
 
-        const div = document.createElement("div");
-        div.className = "item-carrito";
+    const div = document.createElement("div");
+    div.className = "bg-white rounded-lg shadow p-4 flex gap-4";
 
-        div.innerHTML = `
-            <img src="${producto.imagen}">
-            <div>
-                <h3>${producto.nombre}</h3>
-                <p>$${producto.precio}</p>
-                <p>Cantidad: ${item.cantidad}</p>
-                <p>Subtotal: $${subtotal}</p>
-                <button data-id="${item.id}">Eliminar</button>
-            </div>
-        `;
+    div.innerHTML = `
+      <img src="${item.imagen}" class="w-24 h-24 object-cover rounded">
+      <div class="flex-1">
+        <h3 class="font-bold text-lg">${item.nombre}</h3>
+        <p>Precio: $${item.precio}</p>
+        <p>Cantidad: ${item.cantidad}</p>
+        <p class="font-semibold">Subtotal: $${subtotal}</p>
+        <button class="mt-2 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+          data-id="${item.id}">
+          Eliminar
+        </button>
+      </div>
+    `;
 
-        div.querySelector("button").addEventListener("click", () => {
-            eliminarProducto(item.id);
-        });
-
-        contenedor.appendChild(div);
+    div.querySelector("button").addEventListener("click", () => {
+      eliminarProducto(item.id);
     });
 
-    totalSpan.textContent = `$${total}`;
+    contenedor.appendChild(div);
+  });
+
+  totalSpan.textContent = `$${total}`;
 }
 
+/* ===============================
+   ELIMINAR PRODUCTO
+================================ */
 function eliminarProducto(id) {
-    carrito = carrito.filter(p => p.id !== id);
-    guardarCarrito(carrito);
-    renderCarrito();
+  let carrito = obtenerCarrito();
+  carrito = carrito.filter(p => p.id !== id);
+  guardarCarrito(carrito);
+  renderCarrito();
 }
 
-renderCarrito();
+/* ===============================
+   VACIAR CARRITO
+================================ */
+if (botonVaciar) {
+  botonVaciar.addEventListener("click", () => {
+    guardarCarrito([]);
+    renderCarrito();
+  });
+}
+
+/* ===============================
+   INICIALIZAR
+================================ */
+document.addEventListener("DOMContentLoaded", renderCarrito);

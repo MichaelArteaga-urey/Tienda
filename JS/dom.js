@@ -1,29 +1,25 @@
-// dom.js
-import { crearCardProducto } from "/JS/cartas.js";
+import { crearCardProducto } from "./cartas.js";
 
-/* ===============================
-   RENDER PRODUCTOS POR CATEGORÍA
-================================ */
 export function renderProductos(productos, opciones = {}) {
 
-    const contenedores = {
-        onepiece: document.getElementById("tiendaOnepiece"),
-        dragonball: document.getElementById("tiendaDragonball"),
-        bleach: document.getElementById("tiendaBleach")
-    };
+    const contenedores = document.querySelectorAll("[data-categoria]");
 
-    Object.values(contenedores).forEach(c => {
-        if (c) c.innerHTML = "";
-    });
+    // limpiar
+    contenedores.forEach(c => c.innerHTML = "");
 
     productos.forEach(producto => {
-        const contenedor = contenedores[producto.categoria];
+        const contenedor = document.querySelector(
+            `[data-categoria="${producto.categoria}"]`
+        );
+
         if (!contenedor) return;
 
         const card = crearCardProducto(producto, opciones);
         contenedor.appendChild(card);
     });
 }
+
+
 
 
 // ===============================

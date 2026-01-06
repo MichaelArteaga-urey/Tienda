@@ -1,20 +1,13 @@
 
+import { obtenerProductos, inicializarStorage, obtenerCarrito} from "./storage.js";
+import { renderProductos } from "./dom.js";
 
-import { obtenerProductos } from "/JS/storage.js";
-import { renderProductos } from "/JS/dom.js";
+inicializarStorage();
 
-/* ===============================
-   OBTENER PRODUCTOS
-================================ */
-const productos = obtenerProductos();
-
-/* ===============================
-   RENDER INDEX
-================================ */
-window.addEventListener("load", () => {
-    renderProductos(productos, { mostrarBotones: true });
+document.addEventListener("DOMContentLoaded", () => {
+  const productos = obtenerProductos();
+  renderProductos(productos, { mostrarBotones: true});
 });
-
 
 //FUNCION PARA LA BARRA DE BUSCAR
 
@@ -34,3 +27,26 @@ buscador.addEventListener("input",()=>{
         }
     })
 })
+
+// //CONTADOR DE CARRITO
+
+// export function actualizarContadorCarrito(){
+//     const contador=document.getElementById("carritoContador");
+//     if(!contador)return;
+
+//     const carrito=obtenerCarrito();
+
+//     const totalCantidad= carrito.reduce(
+//         (acc, item)=> acc+item.cantidad,
+//         0
+//     )
+//     if(totalCantidad>0){
+//         contador.textContent=totalCantidad;
+//         contador.classList.remove("hidden")
+//     }
+//     else{
+//         contador.classList.add("hidden")
+//     }
+
+// }
+

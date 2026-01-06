@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/CSS/componentes.css">
     <title>SHOPFIGURE</title>
     </head>
-<body class="relative min-h-screen">
+<body class="bg-gray-100 min-h-screen p-10">
 <!--FONDO DE PANTALLA-->
 <div class="fondo"></div>
 <div class="desvanecido"></div>
@@ -79,13 +79,11 @@
   </div>
 </nav>
 
-
-<body class="bg-gray-100 min-h-screen p-10">
 <main class="pt-20">
 <h1 class="text-3xl font-bold mb-8 text-center">🛒 Tu Carrito</h1>
 
-<div id="cartItems" 
-  class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div id="contenedorCarrito" 
+  class="contenedorProductos">
 </div>
 
 <div class="max-w-3xl mx-auto mt-8 bg-white p-6 rounded-lg shadow">
@@ -105,7 +103,8 @@
 </div>
 </main>
 
-<script src="/JS/carrito.js"></script>
+<script type="module" src="/JS/cartas.js"></script>
+<script type="module" src="/JS/carrito.js"></script>
 
 </body>
 </html>

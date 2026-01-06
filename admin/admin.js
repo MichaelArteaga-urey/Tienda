@@ -1,18 +1,24 @@
+/*EXPORTAR DESDE OTROS ARCHIVOS JS LAS FUNCIONES  */
+
 import {
     obtenerProductos,
     guardarProductos,
     inicializarStorage
-} from "/JS/storage.js";
-import { renderProductos } from "/JS/dom.js";
-/* ===============================
-   INICIALIZACIÓN
-================================ */
-inicializarStorage();
-const productos = obtenerProductos();
+} from "./storage.js";
 
-/* ===============================
-   ELEMENTOS DEL DOM
-================================ */
+import { renderProductos } from "/JS/dom.js";
+
+/*INICIALIZACIÓN DE LA BASE LOCAL DE DATOS*/
+
+inicializarStorage();
+let productos = obtenerProductos();
+
+//CONSTANTES QUE SE UTILIZARAN EN LAS FUNCIONES QUE VAMOS A UTILIZAR EN ADMIN 
+//YA SEA PARA AÑADIR, EDITAR, ELIMINAR NUESTROS PRODUCTOS
+
+/*AÑADIMOS UN MENSAJE PARA LOS CONDICIONALES */
+
+
 const mensaje = document.getElementById("mensaje");
 
 // AÑADIR
@@ -31,69 +37,67 @@ const nuevoAtributoEd = document.getElementById("nuevoAtributo");
 // ELIMINAR
 const productoE = document.getElementById("productoEliminar");
 
-/* ===============================
-   AÑADIR PRODUCTO
-================================ */
-document.getElementById("botonAñadir").addEventListener("click", (e) => {
+//FUNCIONES
+
+
+function mostrarMensaje(clase) {
+    mensaje.className = "";
+    mensaje.classList.add(clase);
+    setTimeout(() => mensaje.className = "", 2500);
+}
+
+function recargar() {
+    guardarProductos(productos);
+    setTimeout(() => location.reload(), 1200);
+}
+
+// AÑADIR PRODUCTO
+
+document.getElementById("botonAñadir")?.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const nombre = añadirProducto.value.trim();
-    const precio = Number(añadirValor.value);
-    const stock = Number(añadirExistencia.value);
-    const descripcion = añadirDescripcion.value.trim();
-    const imagen = añadirImagen.value.trim();
-    const categoria = añadirCategoria.value;
-
-    if (!nombre || !precio || !stock || !descripcion || !imagen || !categoria) {
-        mensaje.classList.add("llenarCampos");
-        setTimeout(() => mensaje.classList.remove("llenarCampos"), 2500);
-        return;
-    }
-
-    if (productos.some(p => p.nombre === nombre)) {
-        mensaje.classList.add("repetidoError");
-        setTimeout(() => mensaje.classList.remove("repetidoError"), 2500);
-        return;
-    }
-
+// CREAMOS LA CONTANTE DE NUEVO PRODUCTO DENTRO DEL MISMO ABRA LOS CAMPOS ID , NOMBRE PRECIO, STOCK, DESCRIPCION, IMAGEN, CATEGORIA
+// LA CATEGORIA DE MOMENTO SE DIVIDE EN TRES 
     const nuevoProducto = {
         id: Date.now(),
-        nombre,
-        precio,
-        stock,
-        descripcion,
-        imagen,
-        categoria
+        nombre: añadirProducto.value.trim(),
+        precio: Number(añadirValor.value),
+        stock: Number(añadirExistencia.value),
+        descripcion: añadirDescripcion.value.trim(),
+        imagen: añadirImagen.value.trim(),
+        categoria: añadirCategoria.value
     };
+// CONDICIONALES PARA NO LOS CAMPOS 
+// SI ESTAN VACIOS ALGUNOS CAMPOS 
 
+    if (Object.values(nuevoProducto).some(v => !v)) {
+        mostrarMensaje("llenarCampos");
+        return;
+    }
+// SI YA TENEMOS EL PRODUCTO
+    if (productos.some(p => p.nombre === nuevoProducto.nombre)) {
+        mostrarMensaje("repetidoError");
+        return;
+    }
+//UNA VES LLENADOS LOS CAMPOS SE REALIZA NOS DARA UN MENSAJE DE REALIZADO 
     productos.push(nuevoProducto);
-    guardarProductos(productos);
-
-    mensaje.classList.add("realizado");
-    setTimeout(() => window.location.reload(), 1500);
+    mostrarMensaje("realizado");
+    recargar();
 });
 
-/* ===============================
-   EDITAR PRODUCTO
-================================ */
-document.getElementById("botonEditar").addEventListener("click", (e) => {
+//EDITAR PRODUCTO
+
+document.getElementById("botonEditar")?.addEventListener("click", (e) => {
     e.preventDefault();
 
     const nombre = productoEd.value;
     const atributo = atributoEd.value;
     let nuevoValor = nuevoAtributoEd.value;
 
-    if (!nombre || !atributo || !nuevoValor) {
-        mensaje.classList.add("llenarCampos");
-        setTimeout(() => mensaje.classList.remove("llenarCampos"), 2500);
-        return;
-    }
-
     const producto = productos.find(p => p.nombre === nombre);
 
-    if (!producto) {
-        mensaje.classList.add("noExisteError");
-        setTimeout(() => mensaje.classList.remove("noExisteError"), 2500);
+    if (!producto || !atributo || !nuevoValor) {
+        mostrarMensaje("llenarCampos");
         return;
     }
 
@@ -102,39 +106,51 @@ document.getElementById("botonEditar").addEventListener("click", (e) => {
     }
 
     producto[atributo] = nuevoValor;
-    guardarProductos(productos);
-
-    mensaje.classList.add("realizado");
-    setTimeout(() => window.location.reload(), 1500);
+    mostrarMensaje("realizado");
+    recargar();
 });
 
-/* ===============================
-   ELIMINAR PRODUCTO
-================================ */
-document.getElementById("botonEliminar").addEventListener("click", (e) => {
+//   ELIMINAR PRODUCTO
+
+document.getElementById("botonEliminar")?.addEventListener("click", (e) => {
     e.preventDefault();
 
     const nombre = productoE.value;
     const index = productos.findIndex(p => p.nombre === nombre);
 
     if (index === -1) {
-        mensaje.classList.add("noExisteError");
-        setTimeout(() => mensaje.classList.remove("noExisteError"), 2500);
+        mostrarMensaje("noExisteError");
         return;
     }
 
     productos.splice(index, 1);
-    guardarProductos(productos);
-
-    mensaje.classList.add("realizado");
-    setTimeout(() => window.location.reload(), 1500);
+    mostrarMensaje("realizado");
+    recargar();
 });
 
+/* ===============================
+   DOMContentLoaded es un evento del navegador que se dispara cuando Todo el HTML ya fue cargado y convertido en DOM
+   el Dom es la representacion del html en carpetas
+================================ */
 
-    window.addEventListener("DOMContentLoaded", () => {
-    console.log("Admin DOM cargado");
-    console.log("Productos:", productos);
+window.addEventListener("DOMContentLoaded", () => {
+
+    productoEd.innerHTML = "";
+    productoE.innerHTML = "";
+    atributoEd.innerHTML = "";
+
+    productos.forEach(p => {
+        productoEd.innerHTML += `<option value="${p.nombre}">${p.nombre}</option>`;
+        productoE.innerHTML += `<option value="${p.nombre}">${p.nombre}</option>`;
+    });
+
+    if (productos.length > 0) {
+        Object.keys(productos[0]).forEach(key => {
+            if (key !== "id") {
+                atributoEd.innerHTML += `<option value="${key}">${key}</option>`;
+            }
+        });
+    }
 
     renderProductos(productos, { mostrarBotones: false });
 });
-

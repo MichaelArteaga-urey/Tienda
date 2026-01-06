@@ -1,17 +1,61 @@
-// PRODUCTOS
+// storage.js
+
+export function obtenerAlmacenamiento(llave) {
+    return JSON.parse(localStorage.getItem(llave));
+}
+
+export function guardarAlmacenamiento(llave, valor) {
+    localStorage.setItem(llave, JSON.stringify(valor));
+}
+
+// Helpers específicos (NO obligatorios todavía)
 export function obtenerProductos() {
-  return JSON.parse(localStorage.getItem("productos")) || [];
+    return obtenerAlmacenamiento("productos") || [];
 }
 
 export function guardarProductos(productos) {
-  localStorage.setItem("productos", JSON.stringify(productos));
+    guardarAlmacenamiento("productos", productos);
 }
+const KEY_CARRITO = "carrito";
 
-// CARRITO
 export function obtenerCarrito() {
-  return JSON.parse(localStorage.getItem("carrito")) || [];
+    return JSON.parse(localStorage.getItem(KEY_CARRITO)) || [];
 }
 
 export function guardarCarrito(carrito) {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem(KEY_CARRITO, JSON.stringify(carrito));
 }
+
+
+
+export function inicializarStorage() {
+    if (!localStorage.getItem("productos")) {
+        guardarProductos([]);
+    }
+    if (!localStorage.getItem("carrito")) {
+        guardarCarrito([]);
+    }
+}
+
+function renderProductos(productos, opciones = {}) {
+
+    const contenedores = {
+        onepiece: document.getElementById("tiendaOnepiece"),
+        dragonball: document.getElementById("tiendaDragonball"),
+        bleach: document.getElementById("tiendaBleach")
+    };
+
+    // Limpiar contenedores
+    Object.values(contenedores).forEach(c => {
+        if (c) c.innerHTML = "";
+    });
+
+    productos.forEach(producto => {
+        const contenedor = contenedores[producto.categoria];
+        if (!contenedor) return;
+
+        const card = crearCardProducto(producto, opciones);
+        contenedor.appendChild(card);
+    });
+}
+

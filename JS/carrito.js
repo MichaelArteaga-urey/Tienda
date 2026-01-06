@@ -1,58 +1,61 @@
-function guardarCarrito() {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+import {
+    obtenerCarrito,
+    guardarCarrito,
+    obtenerProductos
+} from "./storage.js";
+
+const contenedor = document.getElementById("contenedorCarrito");
+const totalSpan = document.getElementById("totalCarrito");
+
+let carrito = obtenerCarrito();
+let productos = obtenerProductos();
+
+function renderCarrito() {
+    contenedor.innerHTML = "";
+    let total = 0;
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>El carrito está vacío</p>";
+        totalSpan.textContent = "$0";
+        return;
+    }
+
+    carrito.forEach(item => {
+
+        const producto = productos.find(p => p.id === item.id);
+        if (!producto) return;
+
+        const subtotal = producto.precio * item.cantidad;
+        total += subtotal;
+
+        const div = document.createElement("div");
+        div.className = "item-carrito";
+
+        div.innerHTML = `
+            <img src="${producto.imagen}">
+            <div>
+                <h3>${producto.nombre}</h3>
+                <p>$${producto.precio}</p>
+                <p>Cantidad: ${item.cantidad}</p>
+                <p>Subtotal: $${subtotal}</p>
+                <button data-id="${item.id}">Eliminar</button>
+            </div>
+        `;
+
+        div.querySelector("button").addEventListener("click", () => {
+            eliminarProducto(item.id);
+        });
+
+        contenedor.appendChild(div);
+    });
+
+    totalSpan.textContent = `$${total}`;
 }
 
-function cargarCarrito() {
-  carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+function eliminarProducto(id) {
+    carrito = carrito.filter(p => p.id !== id);
+    guardarCarrito(carrito);
+    renderCarrito();
 }
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function renderCart(){
-  const cartItems = document.getElementById("cartItems");
-  let total = 0;
-  cartItems.innerHTML = "";
-
-  cart.forEach((item, index)=>{
-    total += item.price;
-
-    cartItems.innerHTML += `
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
-
-  <div class="flex items-center gap-4">
-    <img src="${item.image}" class="w-24 h-24 object-cover rounded">
-    <div>
-      <h3 class="font-semibold text-lg">${item.name}</h3>
-      <p class="text-blue-600 font-bold">$${item.price}</p>
-    </div>
-  </div>
-
-  <div class="flex items-center justify-end">
-    <button onclick="removeItem(${index})"
-      class="text-red-500 hover:text-red-700 font-semibold">
-      Eliminar
-    </button>
-  </div>
-
-</div>
-`;
-  });
-
-  document.getElementById("total").textContent = "$" + total;
-}
-
-function removeItem(i){
-  cart.splice(i,1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
-}
-
-function AGREGAR(name, price, image){
-  cart.push({name, price, image});
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Producto añadido al carrito 🛒");
-}
-
-document.addEventListener("DOMContentLoaded", renderCart);
-cargarCarrito();
-guardarCarrito();
+renderCarrito();

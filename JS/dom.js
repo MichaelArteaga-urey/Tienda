@@ -1,29 +1,52 @@
-//funcion para guardar infomacion 
-function guardarAlmacenimientoLocal(llave, valor_a_guardar){
-    localStorage.setItem(llave,JSON.stringify(valor_a_guardar))
+// dom.js
+import { crearCardProducto } from "/JS/cartas.js";
+
+/* ===============================
+   RENDER PRODUCTOS POR CATEGORÍA
+================================ */
+export function renderProductos(productos, opciones = {}) {
+
+    const contenedores = {
+        onepiece: document.getElementById("tiendaOnepiece"),
+        dragonball: document.getElementById("tiendaDragonball"),
+        bleach: document.getElementById("tiendaBleach")
+    };
+
+    Object.values(contenedores).forEach(c => {
+        if (c) c.innerHTML = "";
+    });
+
+    productos.forEach(producto => {
+        const contenedor = contenedores[producto.categoria];
+        if (!contenedor) return;
+
+        const card = crearCardProducto(producto, opciones);
+        contenedor.appendChild(card);
+    });
 }
-function obtenerAlmacenaminetoLocal (llave){
-    const datos = JSON.parse(localStorage.getItem(llave))
-    return datos
+
+
+// ===============================
+// BUSCADOR DE PRODUCTOS
+// ===============================
+const buscador = document.getElementById("buscador");
+
+if (buscador) {
+    buscador.addEventListener("input", () => {
+        const texto = buscador.value.toLowerCase();
+        const tarjetas = document.querySelectorAll(".product-card");
+
+        tarjetas.forEach(card => {
+            const nombre = card
+                .querySelector("h3")
+                .textContent
+                .toLowerCase();
+
+            if (nombre.includes(texto)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
 }
-
-let productos = obtenerAlmacenaminetoLocal('productos') || [];
-
-//FUNCION PARA LA BARRA DE BUSCAR
-
-const buscador = document.getElementById('buscador')
-
-buscador.addEventListener("input",()=>{
-    const texto=buscador.ariaValueMax.toLocaleLowerCase();
-    const tarjetas=document.querySelectorAll(".product-card");
-    tarjetas.forEach(card=>{
-        const nombre = card.querySelector("h3").textContent.toLocaleLowerCase
-
-        if(nombre.includes(texto)){
-            card.style.display="block"
-        }
-        else {
-            card.style.display="none"
-        }
-    })
-})

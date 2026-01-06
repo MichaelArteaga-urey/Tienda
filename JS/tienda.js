@@ -1,35 +1,20 @@
 
-const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-const onePiece = document.getElementById("tiendaOnePiece");
-const dragonBall = document.getElementById("tiendaDragonBall");
-const bleach = document.getElementById("tiendaBleach");
+import { obtenerProductos } from "/JS/storage.js";
+import { renderProductos } from "/JS/dom.js";
 
-productos.forEach(producto => {
+/* ===============================
+   OBTENER PRODUCTOS
+================================ */
+const productos = obtenerProductos();
 
-  const card = `
-  <div class="product-card">
-      <img src="${producto.urlImagen}">
-      <div class="info">
-          <h3>${producto.nombre}</h3>
-          <div class="price">$${producto.valor}</div>
-          <div class="meta">Stock: ${producto.existencia}</div>
-          <div class="meta">${producto.descripcion}</div>
-          <div class="actions">
-              <button class="btn btn-cart"
-                onclick="AGREGAR('${producto.nombre}', ${producto.valor}, '${producto.urlImagen}')">
-                Añadir al carrito
-              </button>
-              <button class="btn btn-buy">Comprar ahora</button>
-          </div>
-      </div>
-  </div>
-  `;
-
-  if (producto.categoria === "onepiece") onePiece.innerHTML += card;
-  if (producto.categoria === "dragonball") dragonBall.innerHTML += card;
-  if (producto.categoria === "bleach") bleach.innerHTML += card;
+/* ===============================
+   RENDER INDEX
+================================ */
+window.addEventListener("load", () => {
+    renderProductos(productos, { mostrarBotones: true });
 });
+
 
 //FUNCION PARA LA BARRA DE BUSCAR
 

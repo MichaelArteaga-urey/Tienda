@@ -146,7 +146,7 @@ background: #1e40af;
 .llenarCampos::after{
     content: 'Por favor compruebe que los campos esten llenados';
 }
-.noExsiteError::after{
+.noExisteError::after{
     content: 'Este elemento no Existe';
 }
 .repetidoError::after{

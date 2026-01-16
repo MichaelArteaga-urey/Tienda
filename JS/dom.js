@@ -1,5 +1,5 @@
 import { crearCardProducto } from "./cartas.js";
-
+import { actualizarContadorCarrito } from "./contador.js";
 export function renderProductos(productos, opciones = {}) {
 
     const contenedores = document.querySelectorAll("[data-categoria]");
@@ -45,4 +45,30 @@ if (buscador) {
             }
         });
     });
+}
+// AGREGAR PRODUCTOS
+
+//=====================================0
+// AGREGAR AL CARRITO
+//=====================================
+
+export function agregarProducto(producto) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  const existe = carrito.find(p => p.id === producto.id);
+
+  if (existe) {
+    existe.cantidad += 1;
+  } else {
+    carrito.push({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      cantidad: 1
+    });
+  }
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarContadorCarrito();
 }

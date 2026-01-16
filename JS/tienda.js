@@ -1,5 +1,5 @@
 
-import { obtenerProductos, inicializarStorage, obtenerCarrito} from "./storage.js";
+import { obtenerProductos, inicializarStorage, obtenerCarrito} from "../JS/storage.js";
 import { renderProductos } from "./dom.js";
 
 inicializarStorage();
@@ -27,26 +27,4 @@ buscador.addEventListener("input",()=>{
         }
     })
 })
-
-// //CONTADOR DE CARRITO
-
-// export function actualizarContadorCarrito(){
-//     const contador=document.getElementById("carritoContador");
-//     if(!contador)return;
-
-//     const carrito=obtenerCarrito();
-
-//     const totalCantidad= carrito.reduce(
-//         (acc, item)=> acc+item.cantidad,
-//         0
-//     )
-//     if(totalCantidad>0){
-//         contador.textContent=totalCantidad;
-//         contador.classList.remove("hidden")
-//     }
-//     else{
-//         contador.classList.add("hidden")
-//     }
-
-// }
 

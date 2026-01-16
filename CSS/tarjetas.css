@@ -9,7 +9,9 @@
     overflow: hidden;
     transition: all .3s ease;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-direction: column ;
 }
 
 .product-card:hover {
@@ -94,7 +96,7 @@
 
 .contenedorProductos {
 
-max-width: 700px;
+max-width: 100%;
 margin: 0 auto 60px;
 padding: 0 10px;
 flex-direction: column;
@@ -117,6 +119,6 @@ gap: 25px;
 .mostrarProductos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 20px;
     padding: 1rem;
 }

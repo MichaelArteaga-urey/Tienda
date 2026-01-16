@@ -53,7 +53,7 @@
           <a href="/admin/admin.html" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">Admin</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">Contactos</a>
+          <a href="/PAG/sesion.html" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0">Contactos</a>
         </li>
       </ul>
     </div>
@@ -96,11 +96,11 @@
             <form>
                 <label>Nombre del Producto</label>
                 <select id="productoEditar">
-                    <option value="">Selecciones el Producto</option>
+                    <option>Seleccione el Producto</option>
                 </select>
                 <label>Atributo</label>
                 <select id="atributoEditar">
-                    <option value=""></option>
+                    <option value="">Seleccione Atributo</option>
                 </select>
                 <label>Nuevo Valor</label>
                 <input type="text" id="nuevoAtributo">
@@ -142,8 +142,9 @@
         <div class="mostrarProductos" data-categoria="marvel"></div>
         </div>
         </main>
-
-    <script type="module" src="/admin/admin.js"></script>
+    <script type="module" src="../JS/storage.js"></script>
+    <script type="module" src="../JS/dom.js"></script>
+    <script type="module" src="./admin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     </body>
 </html>

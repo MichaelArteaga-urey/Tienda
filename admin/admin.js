@@ -4,9 +4,9 @@ import {
     obtenerProductos,
     guardarProductos,
     inicializarStorage
-} from "./storage.js";
+} from "../JS/storage.js";
 
-import { renderProductos } from "/JS/dom.js";
+import { renderProductos } from "../JS/dom.js";
 
 /*INICIALIZACIÓN DE LA BASE LOCAL DE DATOS*/
 
@@ -57,7 +57,7 @@ document.getElementById("botonAñadir")?.addEventListener("click", (e) => {
     e.preventDefault();
 
 // CREAMOS LA CONTANTE DE NUEVO PRODUCTO DENTRO DEL MISMO ABRA LOS CAMPOS ID , NOMBRE PRECIO, STOCK, DESCRIPCION, IMAGEN, CATEGORIA
-// LA CATEGORIA DE MOMENTO SE DIVIDE EN TRES 
+// LA CATEGORIA DE MOMENTO SE DIVIDE EN TRES  
     const nuevoProducto = {
         id: Date.now(),
         nombre: añadirProducto.value.trim(),
@@ -135,9 +135,10 @@ document.getElementById("botonEliminar")?.addEventListener("click", (e) => {
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    productoEd.innerHTML = "";
-    productoE.innerHTML = "";
-    atributoEd.innerHTML = "";
+    productoEd.innerHTML = `<option value="">Seleccione el Producto</option>`;
+    productoE.innerHTML = `<option value="">Seleccione el Producto</option>`;
+    atributoEd.innerHTML = `<option value="">Seleccione Atributo</option>`;
+
 
     productos.forEach(p => {
         productoEd.innerHTML += `<option value="${p.nombre}">${p.nombre}</option>`;

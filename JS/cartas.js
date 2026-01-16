@@ -1,4 +1,4 @@
-import { agregarProducto } from "./storage.js";
+import { agregarProducto } from "../JS/dom.js";
 
 export function crearCardProducto(producto, opciones = { mostrarBotones: true }) {
 

@@ -1,4 +1,4 @@
-import { obtenerCarrito } from "./storage.js";
+import { obtenerCarrito } from "../JS/storage.js";
 
 export function actualizarContadorCarrito() {
   const contador = document.getElementById("carritoContador");

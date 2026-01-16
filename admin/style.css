@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+body{
+
     color: aliceblue;
 }
 
@@ -49,7 +52,7 @@ header{
     gap: 40px;
 
 }
-option{
+.contenedor option{
     color: black;
 }
 .contenedor>div{
@@ -71,8 +74,14 @@ option{
     flex-direction: column;
     gap: 5px;
 }
-.contenedor>div>form>input,
-select{
+
+.contenedor input{
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    color: black;
+}
+.contenedor select{
 border-radius: 5px;
 border: none;
 padding: 5px;
@@ -131,7 +140,7 @@ background: #1e40af;
 }
 
 .llenarCampos::after,
-.noExsiteError::after,
+.noExisteError::after,
 .repetidoError::after,
 .realizado::after{
     background-color: #750505;

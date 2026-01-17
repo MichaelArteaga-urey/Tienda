@@ -1,5 +1,28 @@
 
-const registro = document.getElementById("Registro");
+const registro = document.getElementById("Registro")
+const btn_inicio = document.getElementById("btn_inicio")
+const btn_registro = document.getElementById("btn_registro")
+const slider = document.getElementById("sesionSlider")
+const sesion = document.getElementById("login")
+
+
+btn_inicio.addEventListener("click", () => {
+  sesion.classList.remove("hidden");
+  slider.classList.remove("registro");
+  slider.classList.add("login");
+});
+
+btn_registro.addEventListener("click", () => {
+  sesion.classList.remove("hidden");
+  slider.classList.remove("login");
+  slider.classList.add("registro");
+});
+
+sesion.addEventListener("click", (e) => {
+  if (e.target === sesion) {
+    sesion.classList.add("hidden");
+  }
+});
 
 // EXPRESIONES REGULARES
 const patrones = {

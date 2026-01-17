@@ -55,9 +55,7 @@
   </div>
   </div>
 </nav>
-        
-            <header>
-
+<main>
     <div class="w-full bg-center bg-cover h-[38rem]" style=" background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/16712.jpg');">
         <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
             <div class="text-center">
@@ -67,7 +65,10 @@
             </div>
         </div>
     </div>
-            </header>
+<main>
+
+        <div class="sesion-wrapper">
+          <div class="sesion-slider" id="sesionSlider">
         <div class="contenedor_login">
           <h2>Inicia Sesión</h2>
           <p class="login_subtitulo">Accede a tu cuenta</p>
@@ -84,46 +85,40 @@
       </div>
       <button class="botonlogin" id="botonlogin" type="submit">Entrar</button>
     </div>
-          </form>
-      <p class="login_footer">
-        ¿No tienes cuenta?
-        <button type="submit">Registrarse</button>
-      </p>
+  </form>
         </div>
         <div class="contenedor_registro">
         <h2>Registro</h2>
         <form action="#" id="Registro">
-             <div>
+            <div>
                 <label for="username">nombre</label>
                 <input type="text" name="username" id="username">
                 <small class="error" id="err-username"></small>
-             </div>
-             
-             <div>
+            </div>
+            
+            <div>
                 <label for="email">email</label>
                 <input type="text" name="email" id="email">
                 <small class="error" id="err-email"></small>
-             </div>
-             <div>
+            </div>
+            <div>
                 <label for="password">contraseña</label>
                 <input type="password" name="password" id="password">
                 <small class="error" id="err-password"></small>
-             </div>
+            </div>
               <div>
                 <label for="confirmpassword">confirmar contraseña</label>
                 <input type="password" name="confirmpassword" id="confirmpassword">
                 <small class="error" id="err-confirmpassword"></small>
-             </div>
+            </div>
 
             <button class="botonRegistro" id="botonRegistro" type="submit">Registrar</button>
             <button class="botonLimpiar" id="botonLimpiar" type="reset">Limpiar</button>
 
           </form>
-          <p class="registro-footer">
-      ¿Ya tienes cuenta?
-       <button type="submit">Iniciar Sesión</button>
-    </p>
-        </div>
+      </div>
+      </div>
+      </div>
 
-        <script type="module" src="../JS/contacto.js"></script>
+        <script type="module" src="../JS/sesion.js"></script>
         </body>
